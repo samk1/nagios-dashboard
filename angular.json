@@ -135,5 +135,13 @@
       }
     }
   },
-  "defaultProject": "NagiosDashboard"
+  "defaultProject": "NagiosDashboard",
+  "cli": {
+    "defaultCollection": "@ngrx/schematics"
+  },
+  "schematics": {
+    "@ngrx/schematics:component": {
+      "styleext": "scss"
+    }
+  }
 }
