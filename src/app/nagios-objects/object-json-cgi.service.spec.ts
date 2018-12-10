@@ -24,14 +24,16 @@ describe('ObjectJsonCgiService', () => {
 
     service.getHostgroupDetails()
       .subscribe(hostgroups => {
-        expect(hostgroups.length).toBeGreaterThan(0);
+        expect(hostgroups).toBeDefined();
         done();
       });
 
     const req: TestRequest = http.expectOne("http://localhost/nagios/cgi-bin/objectjson.cgi?query=hostgrouplist&details=true");
 
     req.flush(hostgroupDetailsQueryResponse);
-  })
+  });
+
+
 });
 
 const hostgroupDetailsQueryResponse = {

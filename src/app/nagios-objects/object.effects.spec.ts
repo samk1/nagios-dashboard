@@ -20,7 +20,7 @@ describe('ObjectEffects', () => {
         { 
           provide: ObjectJsonCgiService, 
           useValue: jasmine.createSpyObj('objectJsonCgiService', [
-          'getHostgroups'
+          'getHostgroupDetails'
           ])
         }
       ]
@@ -36,15 +36,15 @@ describe('ObjectEffects', () => {
   it('should load hostgroups', () => {
     actions$ = hot('a', {a: new LoadObjects()});
     const objectJsonCgiService = TestBed.get(ObjectJsonCgiService);
-    objectJsonCgiService.getHostgroups.and.returnValue(Observable.create(observer => {
-      observer.next([1])
+    objectJsonCgiService.getHostgroupDetails.and.returnValue(Observable.create(observer => {
+      observer.next([{}])
     }));
 
     effects.loadObjects$.pipe(
       single((action : ObjectActions) => action.type == ObjectActionTypes.HostgroupsLoaded)
     ).subscribe(
       (hostgroupsLoaded: HostgroupsLoaded ) => {
-        expect(hostgroupsLoaded.hostgroups.length).toBe(1)
+        expect(hostgroupsLoaded.hostgroups).toBeDefined()
       }
     )
   })

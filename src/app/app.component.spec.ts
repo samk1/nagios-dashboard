@@ -1,5 +1,7 @@
 import { TestBed, async } from '@angular/core/testing';
 import { AppComponent } from './app.component';
+import { StoreModule } from '@ngrx/store';
+import { reducers } from './reducers'
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
@@ -7,6 +9,9 @@ describe('AppComponent', () => {
       declarations: [
         AppComponent
       ],
+      imports: [
+        StoreModule.forRoot(reducers),
+      ]
     }).compileComponents();
   }));
 

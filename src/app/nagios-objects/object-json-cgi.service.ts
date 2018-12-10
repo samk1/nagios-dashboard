@@ -54,15 +54,16 @@ export class ObjectJsonCgiService {
     return this.doRequest(params)
       .pipe(
         map<ObjectJsonResponse, Hostgroup[]>(response =>
-          _.values(response.data.hostgrouplist)
-            .map((hostgroupDetails: HostgroupDetails) : Hostgroup => ({
+          _.mapValues(response.data.hostgrouplist, 
+            (hostgroupDetails: HostgroupDetails) : Hostgroup => ({
               name: hostgroupDetails.group_name,
               alias: hostgroupDetails.action_url,
               members: hostgroupDetails.members,
               notes: hostgroupDetails.notes,
               notesUrl: hostgroupDetails.notes_url,
               actionUrl: hostgroupDetails.action_url
-            }))
+            })
+          )
         )
       )
   }

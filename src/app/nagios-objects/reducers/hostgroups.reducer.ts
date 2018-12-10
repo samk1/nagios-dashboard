@@ -1,4 +1,4 @@
-import { Action } from '@ngrx/store';
+import { ObjectActionTypes, ObjectActions } from '../object.actions';
 
 export interface Hostgroup {
   name: string
@@ -9,17 +9,15 @@ export interface Hostgroup {
   actionUrl: string
 }
 
-export interface State {
-  hostgroups: Hostgroup[]
-}
+export type State = {[key: string]: Hostgroup}
 
 export const initialState: State = {
-  hostgroups: []
 };
 
-export function reducer(state = initialState, action: Action): State {
+export function reducer(state = initialState, action: ObjectActions): State {
   switch (action.type) {
-
+    case ObjectActionTypes.HostgroupsLoaded:
+      return action.hostgroups;
     default:
       return state;
   }

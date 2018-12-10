@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-import { Hostgroup } from './reducers/hostgroups.reducer';
+import * as fromHostgroups from './reducers/hostgroups.reducer';
 
 export enum ObjectActionTypes {
   LoadObjects = '[Object] Load Objects',
@@ -12,7 +12,7 @@ export class LoadObjects implements Action {
 
 export class HostgroupsLoaded implements Action {
   readonly type = ObjectActionTypes.HostgroupsLoaded
-  readonly hostgroups : Hostgroup[]
+  readonly hostgroups : fromHostgroups.State
 }
 
 export type ObjectActions = LoadObjects | HostgroupsLoaded;

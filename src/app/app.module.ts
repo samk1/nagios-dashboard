@@ -8,6 +8,8 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { EffectsModule } from '@ngrx/effects';
 import { AppEffects } from './app.effects';
+import { NagiosObjectsModule } from './nagios-objects/nagios-objects.module';
+import { OBJECT_CGI_URL } from './nagios-objects/object-json-cgi.service';
 
 @NgModule({
   declarations: [
@@ -15,11 +17,17 @@ import { AppEffects } from './app.effects';
   ],
   imports: [
     BrowserModule,
+    NagiosObjectsModule,
     StoreModule.forRoot(reducers, { metaReducers }),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
     EffectsModule.forRoot([AppEffects])
   ],
-  providers: [],
+  providers: [
+    {
+      provide: OBJECT_CGI_URL,
+      useValue: environment.objectCgiUrl
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
