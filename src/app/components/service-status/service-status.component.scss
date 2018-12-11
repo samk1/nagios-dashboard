@@ -1,0 +1,29 @@
+div.service-status-container {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+div.service-status-container.status-ok {
+    background-color: green;
+}
+
+div.service-status-container.status-warning {
+    background-color: yellow;
+}
+
+div.service-status-container.status-critical {
+    background-color: red
+}
+
+div.service-status-container.status-unknown {
+    background-color: grey;
+}
+
+.service-status-container div {
+    display: flex;
+}
+
+div.service-status-name {
+    flex-grow: 1;
+}

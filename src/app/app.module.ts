@@ -10,10 +10,12 @@ import { EffectsModule } from '@ngrx/effects';
 import { AppEffects } from './app.effects';
 import { NagiosObjectsModule } from './nagios-objects/nagios-objects.module';
 import { OBJECT_CGI_URL } from './nagios-objects/object-json-cgi.service';
+import { ServiceStatusComponent } from './components/service-status/service-status.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ServiceStatusComponent
   ],
   imports: [
     BrowserModule,
