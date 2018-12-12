@@ -2,6 +2,9 @@ import { TestBed, async } from '@angular/core/testing';
 import { AppComponent } from './app.component';
 import { StoreModule } from '@ngrx/store';
 import { reducers } from './reducers'
+import { ComponentsModule } from './components';
+import { BrowserModule } from '@angular/platform-browser';
+import { ReactiveFormsModule } from '@angular/forms';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
@@ -10,6 +13,7 @@ describe('AppComponent', () => {
         AppComponent
       ],
       imports: [
+        ComponentsModule,
         StoreModule.forRoot(reducers),
       ]
     }).compileComponents();

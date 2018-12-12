@@ -4,26 +4,15 @@ import { map } from 'rxjs/operators';
 import * as _ from 'lodash';
 import { Observable } from 'rxjs';
 import { Hostgroup } from './reducers/hostgroups.reducer';
+import { JsonCgiResponse, AbstractCgi } from '../nagios-common';
 
 export const OBJECT_CGI_URL = new InjectionToken<string>('object cgi url');
 
-interface ObjectJsonResponse {
-  format_version: number
-  result: ObjectJsonResult
-  data: ObjectJsonData
-}
+type ObjectJsonHostgroupListResponse = JsonCgiResponse<ObjectJsonHostgroupData>
 
-interface ObjectJsonResult {
-  query_time: number
-  cgi: string
-  user: string
-  query: string
-  query_status: string
-  program_start: number
-  last_data_update: number
-  type_code: number
-  type_text: string
-  message: string
+interface ObjectJsonHostgroupData {
+  selectors: any,
+  hostgrouplist: ObjectJsonHostgroupList
 }
 
 type ObjectJsonHostgroupList = {[key:string]: HostgroupDetails }
@@ -44,17 +33,17 @@ type QueryParams = {[key:string]: string | boolean | number}
 @Injectable({
   providedIn: 'root'
 })
-export class ObjectJsonCgiService {
+export class ObjectJsonCgiService extends AbstractCgi {
   getHostgroupDetails() : Observable<Hostgroup[]> {
     const params: QueryParams = {
       query: 'hostgrouplist',
       details: true
     }
 
-    return this.doRequest(params)
+    return this.doRequest<ObjectJsonHostgroupData>(params)
       .pipe(
-        map<ObjectJsonResponse, Hostgroup[]>(response =>
-          _.mapValues(response.data.hostgrouplist, 
+        map<ObjectJsonHostgroupData, Hostgroup[]>(data =>
+          _.mapValues(data.hostgrouplist, 
             (hostgroupDetails: HostgroupDetails) : Hostgroup => ({
               name: hostgroupDetails.group_name,
               alias: hostgroupDetails.action_url,
@@ -68,19 +57,10 @@ export class ObjectJsonCgiService {
       )
   }
 
-  private doRequest(params: QueryParams) : Observable<ObjectJsonResponse> {
-    const requestUrl: string = `${this.cgiUrl}?${this.buildQuery(params)}`
-
-    return this.http.get<ObjectJsonResponse>(requestUrl)
-  }
-
-  private buildQuery(params: QueryParams) : string {
-    return _.transform(params, (q, v, k) => q.push(`${k}=${v}`), [])
-      .join('&')
-  }
-
   constructor(
-    private http: HttpClient,
-    @Inject(OBJECT_CGI_URL) private cgiUrl: string
-    ) { }
+    http: HttpClient,
+    @Inject(OBJECT_CGI_URL) cgiUrl: string
+    ) { 
+      super(http, cgiUrl);
+    }
 }

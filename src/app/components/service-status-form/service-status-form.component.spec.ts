@@ -1,6 +1,10 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ServiceStatusFormComponent } from './service-status-form.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { ComponentsModule } from '..';
+import { ServiceStatusFilterComponent } from '../service-status-filter/service-status-filter.component';
+import { ServiceStatusFilterValueAccessorDirective } from '../service-status-filter/service-status-filter-value-accessor.directive';
 
 describe('ServiceStatusFormComponent', () => {
   let component: ServiceStatusFormComponent;
@@ -8,7 +12,14 @@ describe('ServiceStatusFormComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ServiceStatusFormComponent ]
+      declarations: [ 
+        ServiceStatusFormComponent, 
+        ServiceStatusFilterComponent, 
+        ServiceStatusFilterValueAccessorDirective
+      ],
+      imports: [
+        ReactiveFormsModule
+      ]
     })
     .compileComponents();
   }));
