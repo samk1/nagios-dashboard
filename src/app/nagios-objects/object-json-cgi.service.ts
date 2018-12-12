@@ -4,11 +4,9 @@ import { map } from 'rxjs/operators';
 import * as _ from 'lodash';
 import { Observable } from 'rxjs';
 import { Hostgroup } from './reducers/hostgroups.reducer';
-import { JsonCgiResponse, AbstractCgi } from '../nagios-common';
+import { JsonCgiResponse, AbstractCgi, QueryParams } from '../nagios-common';
 
 export const OBJECT_CGI_URL = new InjectionToken<string>('object cgi url');
-
-type ObjectJsonHostgroupListResponse = JsonCgiResponse<ObjectJsonHostgroupData>
 
 interface ObjectJsonHostgroupData {
   selectors: any,
@@ -25,10 +23,6 @@ interface HostgroupDetails {
   notes_url: string
   action_url: string
 }
-
-type ObjectJsonData = ObjectJsonHostgroupList
-
-type QueryParams = {[key:string]: string | boolean | number}
 
 @Injectable({
   providedIn: 'root'

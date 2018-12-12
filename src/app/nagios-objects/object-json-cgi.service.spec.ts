@@ -6,7 +6,10 @@ import { ObjectJsonCgiService, OBJECT_CGI_URL } from './object-json-cgi.service'
 describe('ObjectJsonCgiService', () => {
   beforeEach(() => TestBed.configureTestingModule({
     providers: [
-      { provide: OBJECT_CGI_URL, useValue: "http://localhost/nagios/cgi-bin/objectjson.cgi" }
+      { 
+        provide: OBJECT_CGI_URL, 
+        useValue: "http://localhost/nagios/cgi-bin/objectjson.cgi" 
+      }
     ],
     imports: [
       HttpClientTestingModule
