@@ -1,0 +1,32 @@
+<div>
+  <input 
+    type="checkbox" 
+    [checked]="filterAll" 
+    (change)="toggleAll()"
+    (blur)="onBlur()" />All
+  <input 
+    type="checkbox" 
+    [checked]="filterOk"
+    (change)="toggleOk()"
+    (blur)="onBlur()" />Ok
+  <input 
+    type="checkbox" 
+    [checked]="filterWarning" 
+    (change)="toggleWarning()"
+    (blur)="onBlur()" />Warning
+  <input 
+    type="checkbox" 
+    [checked]="filterCritical" 
+    (change)="toggleCritical()"
+    (blur)="onBlur()" />Critical
+  <input 
+    type="checkbox" 
+    [checked]="filterUnknown" 
+    (change)="toggleUnknown()"
+    (blur)="onBlur()" />Unknown
+  <input 
+    type="checkbox" 
+    [checked]="filterPending" 
+    (change)="togglePending()"
+    (blur)="onBlur()" />Pending
+</div>

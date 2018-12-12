@@ -10,16 +10,20 @@ import { EffectsModule } from '@ngrx/effects';
 import { AppEffects } from './app.effects';
 import { NagiosObjectsModule } from './nagios-objects/nagios-objects.module';
 import { OBJECT_CGI_URL } from './nagios-objects/object-json-cgi.service';
-import { ServiceStatusComponent } from './components/service-status/service-status.component';
+import { ComponentsModule } from './components';
+import { ServiceStatusFormComponent } from './components/service-status-form/service-status-form.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ServiceStatusComponent
+    ServiceStatusFormComponent,
   ],
   imports: [
     BrowserModule,
     NagiosObjectsModule,
+    ComponentsModule,
+    ReactiveFormsModule,
     StoreModule.forRoot(reducers, { metaReducers }),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
     EffectsModule.forRoot([AppEffects])

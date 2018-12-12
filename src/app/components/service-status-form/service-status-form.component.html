@@ -1,0 +1,15 @@
+<div [formGroup]="form">
+  <p>
+    service-status-form works!
+    {{form.value | json}}
+  </p>
+  
+  <app-service-status-filter formControlName="statusFilter"></app-service-status-filter>
+  <select formControlName="hostgroupFilter">
+    <option 
+      *ngFor="let hostgroupName of hostgroupNames">
+      {{hostgroupName}}
+    </option>
+  </select>
+</div>
+

@@ -25,12 +25,24 @@ export const reducers: ActionReducerMap<State> = {
   services: fromServices.reducer
 };
 
-export const selectNagiosObjects = createFeatureSelector('nagiosObjects');
+const selectNagiosObjectsState = createFeatureSelector('nagiosObjects');
 
-export const selectHostgroups = (state: State): fromHostgroups.State => state.hostgroups
+const selectHostgroupsState = createSelector(
+  selectNagiosObjectsState,
+  (state: State): fromHostgroups.State => state.hostgroups
+)
+
+export const selectHostgroups = createSelector(
+  selectHostgroupsState,
+  (state: fromHostgroups.State) => Object.values(state)
+)
 
 export const selectHostgroupCount = createSelector(
-  selectNagiosObjects,
-  selectHostgroups,
-  (state: fromHostgroups.State) => state ? Object.keys(state).length : 0
+  selectHostgroupsState,
+  (state: fromHostgroups.State) => Object.keys(state).length
+)
+
+export const selectHostgroupNames = createSelector(
+  selectHostgroupsState,
+  (state: fromHostgroups.State) => Object.keys(state)
 )
