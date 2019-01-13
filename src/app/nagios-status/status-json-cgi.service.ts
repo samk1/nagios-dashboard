@@ -74,11 +74,12 @@ export class StatusJsonCgiService extends AbstractCgi {
     }
 
     return this.doRequest<StatusJsonServiceListData>(params).pipe(
-      map(data => Object.values(data.servicelist).map(serviceStatusData => (<ServiceStatus>{
-        hostName: serviceStatusData.host_name,
-        serviceDescription: serviceStatusData.description,
-        pluginOutput: serviceStatusData.plugin_output
-      }))
+      map(data => Object.values(data.servicelist).map(serviceStatusData => 
+        (<ServiceStatus>{
+          hostName: serviceStatusData.host_name,
+          serviceDescription: serviceStatusData.description,
+          pluginOutput: serviceStatusData.plugin_output
+        }))
     ));
   }
 

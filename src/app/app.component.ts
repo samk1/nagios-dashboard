@@ -15,7 +15,7 @@ export class AppComponent implements OnInit {
   hostgroupNames$: Observable<string[]>
 
   ngOnInit(): void {
-    this.store.dispatch(new LoadObjects())
+    //this.store.dispatch(new LoadObjects())
   }
 
   title = 'NagiosDashboard';

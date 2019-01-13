@@ -8,11 +8,10 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { EffectsModule } from '@ngrx/effects';
 import { AppEffects } from './app.effects';
-import { NagiosObjectsModule } from './nagios-objects/nagios-objects.module';
-import { OBJECT_CGI_URL } from './nagios-objects/object-json-cgi.service';
+import { NagiosObjectsModule, OBJECT_CGI_URL } from './nagios-objects';
 import { ComponentsModule } from './components';
-import { ServiceStatusFormComponent } from './components/service-status-form/service-status-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { DashboardModule } from './dashboard'
 
 @NgModule({
   declarations: [
@@ -23,9 +22,10 @@ import { ReactiveFormsModule } from '@angular/forms';
     NagiosObjectsModule,
     ComponentsModule,
     ReactiveFormsModule,
+    DashboardModule,
     StoreModule.forRoot(reducers, { metaReducers }),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
-    EffectsModule.forRoot([AppEffects])
+    EffectsModule.forRoot([AppEffects]),
   ],
   providers: [
     {
